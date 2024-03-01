@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const candidateSchema = new Schema({
@@ -33,3 +33,5 @@ const candidateSchema = new Schema({
         required: true
     },
 },{timestamps: true});
+
+export default mongoose.model("candidate", candidateSchema);

@@ -3,7 +3,7 @@ import colors from "colors";
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URL);
+    const conn = await mongoose.connect(process.env.MONGO_URL, {dbName: "EZinterview"});
     console.log(
       `Connected To MongoDB Database ${conn.connection.host}`.bgMagenta.white
     );

@@ -27,6 +27,7 @@ export const createCandidate = async (req, res, next) => {
         await candidate.save();
         res.status(201).json(candidate);
     } catch (error) {
+        console.log(error);
         next(errorHandler(500, 'Internal Server Error'));
     }
 };

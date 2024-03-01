@@ -12,7 +12,7 @@ const router = express.Router();
 
 
 router.post('/create', createCandidate);
-router.get('/get-all', verifyToken,getAllCandidates);
+router.get('/get-all',getAllCandidates);
 router.get('/:id',verifyToken, getCandidateById);
 router.put('update/:id',verifyToken, updateCandidateById);
 router.delete('delete/:id',verifyToken ,deleteCandidateById);

@@ -14,7 +14,13 @@ connectDB();
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+const corsOptions = { 
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200, // Corrected property name
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -32,14 +38,6 @@ app.use("/api/user", userRouter);
 
 const PORT = process.env.PORT || 8080;
 
-
-app.listen(PORT, () => {
-  console.log(
-    `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
-      .white
-  );
-});
-
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
@@ -49,3 +47,12 @@ app.use((err, req, res, next) => {
     message,
   });
 });
+
+app.listen(PORT, () => {
+  console.log(
+    `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
+      .white
+  );
+});
+
+

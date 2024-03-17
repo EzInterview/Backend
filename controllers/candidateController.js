@@ -41,6 +41,32 @@ export const getAllCandidates = async (req, res, next) => {
         next(errorHandler(500, 'Internal Server Error'));
     }
 };
+export const savePDFURL = async (req, res, next) => {
+    try {
+        // Destructure the request body to get candidateId and pdf_url
+        const { candidateId, pdf_url } = req.body;
+
+        // Find the candidate by ID and update the pdf_url field
+        const updatedCandidate = await Candidate.findByIdAndUpdate(
+            candidateId,
+            { $set: { pdf_url } },
+            { new: true }
+        );
+
+        // If candidate not found, return an error
+        if (!updatedCandidate) {
+            return next(errorHandler(404, 'Candidate not found'));
+        }
+
+        // Return the updated candidate document
+        res.status(200).json({ message: 'PDF URL saved successfully', candidate: updatedCandidate });
+    } catch (error) {
+        // Handle any errors and return an error response
+        console.error('Error saving PDF URL:', error.message);
+        next(errorHandler(500, 'Internal Server Error'));
+    }
+};
+
 
 export const getCandidateById = async (req, res, next) => {
     try {

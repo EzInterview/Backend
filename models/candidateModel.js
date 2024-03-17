@@ -32,6 +32,10 @@ const candidateSchema = new Schema({
         ref: 'User',
         required: true
     },
+    pdf_url: { 
+        type: String,
+        required: false, 
+    }
 },{timestamps: true});
 
 export default mongoose.model("candidate", candidateSchema);
